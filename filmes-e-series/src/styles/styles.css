@@ -9,7 +9,7 @@
 
 #container {
   background-color: #16181d;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 #container .navbar {
