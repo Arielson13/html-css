@@ -1,0 +1,21 @@
+.sectionMovies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px 0px;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.movie {
+  background: #1c1c1c;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.movie img {
+  width: 100%;
+  border-radius: 10px;
+}
