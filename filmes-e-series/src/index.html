@@ -3,33 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles/styles.css" />
-    <link rel="stylesheet" href="styles/sectionMovies.css" />
-    <title>Movie App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles/imports.css" />
+    <title>MovieApp</title>
   </head>
   <body>
-    <div id="container">
+    <header>
       <nav class="navbar">
-        <ul>
-          <div class="itens">
-            <li class="logo">
-              <h2 href="#">MovieApp</h2>
-            </li>
-            <li>
-              <a href="#">Popular</a>
-            </li>
-            <li>
-              <a href="#">All Movies</a>
-            </li>
-          </div>
-          <div class="search">
-            <input type="text" placeholder="Search for movies..." />
-          </div>
-        </ul>
-      </nav>
-      <section class="sectionMovies"></section>
-    </div>
+        <div class="navbar-content">
+          <div class="logo">🎬 MovieApp</div>
 
-    <script src="js/scripts.js"></script>
+          <ul class="nav-links">
+            <li><a href="#" class="active">Popular</a></li>
+            <li><a href="#">All Movies</a></li>
+          </ul>
+
+          <div class="search">
+            <input type="text" placeholder="Buscar filmes..." />
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="sectionMovies"></section>
+
+      <div class="pagination">
+        <button id="prevPage" disabled>Anterior</button>
+        <span id="currentPage">1</span>
+        <button id="nextPage">Próxima</button>
+      </div>
+    </main>
+
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h2>🎬 MovieApp</h2>
+          <p>Explore, descubra e aproveite o melhor do cinema.</p>
+        </div>
+
+        <ul class="footer-links">
+          <li><a href="#">Sobre</a></li>
+          <li><a href="#">Contato</a></li>
+          <li><a href="#">Privacidade</a></li>
+          <li><a href="#">Termos</a></li>
+        </ul>
+
+        <div class="footer-socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 MovieApp. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <!-- <script src="js/scripts.js"></script> -->
   </body>
 </html>

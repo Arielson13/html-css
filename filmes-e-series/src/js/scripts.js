@@ -1,35 +1,86 @@
-const apikey = "9d1c1f083fcc4b5b345c477285200577";
-const baseUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apikey}&language=pt-BR&page=1`;
-const IMG_URL = "https://image.tmdb.org/t/p/w500";
+document.addEventListener("DOMContentLoaded", () => {
+  const apiKey = "9d1c1f083fcc4b5b345c477285200577"; // sua chave TMDB
+  const sectionMovies = document.querySelector(".sectionMovies");
+  const prevBtn = document.getElementById("prevPage");
+  const nextBtn = document.getElementById("nextPage");
+  const currentPageSpan = document.getElementById("currentPage");
 
-const sectionMovies = document.querySelector(".sectionMovies");
 
-async function fetchData() {
-  try {
-    const response = await fetch(baseUrl);
-    const data = await response.json();
-    console.log(data.results);
-    printMovies(data.results);
-  } catch (error) {
-    console.error("Erro ao buscar filmes", error);
+  let currentPage = 1;
+  let totalPages = 1;
+  let currentQuery = "2025"; // pode ser alterado pelo input futuramente
+
+
+  async function getMovies(page = 1) {
+    sectionMovies.innerHTML = `<p style="text-align:center;color:#888;">Carregando...</p>`;
+
+    try {
+      const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=pt-BR&query=${encodeURIComponent(
+        currentQuery
+      )}&page=${page}`;
+
+      const response = await fetch(url);
+      const data = await response.json();
+
+      if (data.results && data.results.length > 0) {
+        showMovies(data.results);
+        totalPages = data.total_pages;
+        updatePagination();
+      } else {
+        sectionMovies.innerHTML = `<p style="text-align:center;color:#888;">Nenhum resultado encontrado.</p>`;
+      }
+    } catch (error) {
+      console.error("Erro ao buscar filmes:", error);
+      sectionMovies.innerHTML = `<p style="text-align:center;color:#f55;">Erro na conexão com o TMDB.</p>`;
+    }
   }
-}
 
-function printMovies(movies) {
-  sectionMovies.innerHTML = "";
 
-  movies.forEach((movie) => {
-    const movieCard = document.createElement("div");
-    movieCard.classList.add("movie");
+  function showMovies(movies) {
+    sectionMovies.innerHTML = movies
+      .map(
+        (m) => `
+        <div class="movie">
+          <img src="${
+            m.poster_path
+              ? `https://image.tmdb.org/t/p/original${m.poster_path}`
+              : "assets/placeholder.jpg"
+          }" loading="lazy" />
+          <div class="info">
+            <h3>${m.title}</h3>
+            <div class="rating">
+              ⭐ ${m.vote_average.toFixed(1)}
+            </div>
+          </div>
+        </div>
+      `
+      )
+      .join("");
+  }
 
-    movieCard.innerHTML = `
-      <img src="${IMG_URL + movie.poster_path}" alt="${movie.title}">
-      <h3>${movie.title}</h3>
-      <p>⭐ ${movie.vote_average}</p>
-    `;
+  
+  function updatePagination() {
+    currentPageSpan.textContent = currentPage;
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+  }
 
-    sectionMovies.appendChild(movieCard);
+
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      getMovies(currentPage);
+    }
   });
-}
 
-fetchData();
+
+  nextBtn.addEventListener("click", () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      getMovies(currentPage);
+    }
+  });
+
+  
+  getMovies();
+});
