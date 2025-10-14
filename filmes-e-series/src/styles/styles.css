@@ -19,4 +19,8 @@
 body {
   background-color: var(--bg-main);
   color: var(--text-light);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

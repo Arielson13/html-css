@@ -4,15 +4,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevBtn = document.getElementById("prevPage");
   const nextBtn = document.getElementById("nextPage");
   const currentPageSpan = document.getElementById("currentPage");
-
+  const search = document.getElementById("searchMovies");
 
   let currentPage = 1;
   let totalPages = 1;
   let currentQuery = "2025"; // pode ser alterado pelo input futuramente
 
+  prevBtn.style.display = "none";
+  nextBtn.style.display = "none";
+  currentPageSpan.style.display = "none";
 
   async function getMovies(page = 1) {
-    sectionMovies.innerHTML = `<p style="text-align:center;color:#888;">Carregando...</p>`;
+    sectionMovies.innerHTML = `<span class="loader"></span>`;
 
     try {
       const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=pt-BR&query=${encodeURIComponent(
@@ -23,9 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
 
       if (data.results && data.results.length > 0) {
-        showMovies(data.results);
-        totalPages = data.total_pages;
-        updatePagination();
+        setTimeout(() => {
+          showMovies(data.results);
+          searchMovies(data.results);
+          totalPages = data.total_pages;
+          updatePagination();
+        }, 3000);
       } else {
         sectionMovies.innerHTML = `<p style="text-align:center;color:#888;">Nenhum resultado encontrado.</p>`;
       }
@@ -35,8 +41,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function searchMovies(moviesFiltered) {
+    search.addEventListener("keyup", (e) => {
+      const filter = moviesFiltered.filter((i) =>
+        i.title.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())
+      );
+      showMovies(filter);
+    });
+  }
 
   function showMovies(movies) {
+    prevBtn.style.display = "block";
+    nextBtn.style.display = "block";
+    currentPageSpan.style.display = "block";
+
     sectionMovies.innerHTML = movies
       .map(
         (m) => `
@@ -58,13 +76,11 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
   }
 
-  
   function updatePagination() {
     currentPageSpan.textContent = currentPage;
     prevBtn.disabled = currentPage === 1;
     nextBtn.disabled = currentPage === totalPages;
   }
-
 
   prevBtn.addEventListener("click", () => {
     if (currentPage > 1) {
@@ -73,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-
   nextBtn.addEventListener("click", () => {
     if (currentPage < totalPages) {
       currentPage++;
@@ -81,6 +96,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  
   getMovies();
 });
