@@ -8,7 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentPage = 1;
   let totalPages = 1;
-  let currentQuery = "2025"; // pode ser alterado pelo input futuramente
+  // let currentQuery = "2025" || "2000" || "2022"; // pode ser alterado pelo input futuramente
+  let options = ["2000", "2021", "2022", "2023", "2024", "2025"];
+  let currentQuery = options[Math.floor(Math.random() * options.length)];
+
 
   prevBtn.style.display = "none";
   nextBtn.style.display = "none";
@@ -18,8 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sectionMovies.innerHTML = `<span class="loader"></span>`;
 
     try {
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=pt-BR&query=${encodeURIComponent(
-        currentQuery
+      const url = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=pt-BR&sort_by=popularity.desc
       )}&page=${page}`;
 
       const response = await fetch(url);
@@ -59,10 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .map(
         (m) => `
         <div class="movie">
-          <img src="${
-            m.poster_path
-              ? `https://image.tmdb.org/t/p/original${m.poster_path}`
-              : "assets/placeholder.jpg"
+          <img src="${m.poster_path
+            ? `https://image.tmdb.org/t/p/original${m.poster_path}`
+            : "assets/placeholder.jpg"
           }" loading="lazy" />
           <div class="info">
             <h3>${m.title}</h3>
