@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes do Filme</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
     <link rel="stylesheet" href="styles/imports.css" />
-    <title>MovieApp</title>
   </head>
   <body>
     <header>
@@ -17,7 +17,7 @@
           <div class="logo">🎬 MovieApp</div>
 
           <ul class="nav-links">
-            <li><a href="#" class="active" id="homeLink">Popular</a></li>
+            <li><a href="index.html" class="active">Popular</a></li>
             <li><a href="#">All Movies</a></li>
           </ul>
 
@@ -32,15 +32,7 @@
       </nav>
     </header>
 
-    <main>
-      <section class="sectionMovies" id="navbar-top"></section>
-
-      <div class="pagination">
-        <button id="prevPage" disabled>Anterior</button>
-        <span id="currentPage">1</span>
-        <button id="nextPage">Próxima</button>
-      </div>
-    </main>
+    <div id="movie-details"></div>
 
     <footer class="footer">
       <div class="footer-container">
@@ -79,6 +71,6 @@
       </div>
     </footer>
 
-    <script src="js/scripts.js"></script>
+    <script src="./js/movie.js"></script>
   </body>
 </html>

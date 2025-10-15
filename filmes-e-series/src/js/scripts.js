@@ -9,9 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentPage = 1;
   let totalPages = 1;
   // let currentQuery = "2025" || "2000" || "2022"; // pode ser alterado pelo input futuramente
-  let options = ["2000", "2021", "2022", "2023", "2024", "2025"];
-  let currentQuery = options[Math.floor(Math.random() * options.length)];
-
 
   prevBtn.style.display = "none";
   nextBtn.style.display = "none";
@@ -33,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
           searchMovies(data.results);
           totalPages = data.total_pages;
           updatePagination();
-        }, 3000);
+        }, 2000);
       } else {
         sectionMovies.innerHTML = `<p style="text-align:center;color:#888;">Nenhum resultado encontrado.</p>`;
       }
@@ -60,10 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
     sectionMovies.innerHTML = movies
       .map(
         (m) => `
-        <div class="movie">
-          <img src="${m.poster_path
-            ? `https://image.tmdb.org/t/p/original${m.poster_path}`
-            : "assets/placeholder.jpg"
+        <div class="movie" data-id="${m.id}">
+          <img src="${
+            m.poster_path
+              ? `https://image.tmdb.org/t/p/original${m.poster_path}`
+              : "assets/placeholder.jpg"
           }" loading="lazy" />
           <div class="info">
             <h3>${m.title}</h3>
@@ -75,6 +73,27 @@ document.addEventListener("DOMContentLoaded", () => {
       `
       )
       .join("");
+
+    addClickEventToMovies();
+  }
+
+  function addClickEventToMovies() {
+    const movies = document.querySelectorAll(".movie");
+
+    movies.forEach((movie) => {
+      movie.addEventListener("click", () => {
+        const movieId = movie.getAttribute("data-id");
+
+        prevBtn.style.display = "none";
+        nextBtn.style.display = "none";
+        currentPageSpan.style.display = "none";
+
+        sectionMovies.innerHTML = `<span class="loader"></span>`;
+        setTimeout(() => {
+          window.location.href = `movie.html?id=${movieId}`;
+        }, 2000);
+      });
+    });
   }
 
   function updatePagination() {

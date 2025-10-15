@@ -1,40 +1,43 @@
-/* ===== FOOTER ===== */
 .footer {
   background: #111317;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 3rem 1rem 1.5rem;
   color: #d1d5db;
+  padding: 3rem 1rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   text-align: center;
-
-  margin-bottom: 0;
 }
 
-.footer-content {
-  max-width: 1200px;
+.footer-container {
+  max-width: 1300px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 2rem;
+  align-items: center;
+  justify-items: center;
+  position: relative;
 }
 
 .footer-brand h2 {
   color: #22c55e;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-bottom: 0.5rem;
 }
 
 .footer-brand p {
   color: #9ca3af;
   font-size: 0.95rem;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .footer-links {
   list-style: none;
   display: flex;
-  gap: 1.8rem;
   flex-wrap: wrap;
+  gap: 1.5rem;
   justify-content: center;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-links a {
@@ -51,18 +54,34 @@
 
 .footer-socials {
   display: flex;
-  gap: 1rem;
+  gap: 1.2rem;
+  justify-content: center;
 }
 
 .footer-socials a {
   color: #d1d5db;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   transition: all 0.3s ease;
 }
 
 .footer-socials a:hover {
   color: #22c55e;
   transform: translateY(-3px);
+}
+
+.scroll-top {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  font-size: 2.8rem;
+  color: #22c55e;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.8;
+}
+
+.scroll-top:hover {
+  transform: translateY(-4px);
+  opacity: 1;
 }
 
 .footer-bottom {
@@ -76,13 +95,26 @@
   color: #9ca3af;
 }
 
-/* ===== Responsividade ===== */
-@media (max-width: 768px) {
-  .footer-content {
-    gap: 1.5rem;
+@media (min-width: 768px) {
+  .footer-container {
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
   }
 
-  .footer-links {
-    gap: 1rem;
+  .footer-brand {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .scroll-top {
+    bottom: 2.5rem;
+    right: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-top {
+    position: static;
+    margin-top: 1rem;
   }
 }
