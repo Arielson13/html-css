@@ -1,0 +1,90 @@
+:root {
+    --bg-color: #f2f2f2;
+    --text-color: #222;
+    --primary: #4b9ce2;
+    --card-bg: #fff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --bg-color: #1c1c1c;
+    --text-color: #f1f1f1;
+    --card-bg: #2a2a2a;
+    --shadow: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition: background 0.3s, color 0.3s;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+section {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+#add-habit input {
+    padding: 0.5rem;
+    width: 60%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+#add-btn {
+    background: var(--primary);
+    color: #ffff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#add-btn:hover {
+    opacity: 0.8;
+}
+
+ul#habits {
+    list-style: none;
+    padding: 0;
+}
+
+.habit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #ccc;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #777;
+}

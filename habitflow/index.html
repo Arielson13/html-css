@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HabitFlow - Dashboard de Hábitos</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/icons/habit.png" type="image/png">
+</head>
+
+<body>
+    <header>
+        <h1>HabitFlow</h1>
+        <button id="theme-toggle">🍌</button>
+    </header>
+
+    <main>
+        <section id="add-habit">
+            <h2>Adicionar Hábito</h2>
+            <input type="text" id="habit-name" placeholder="Ex: Beber água" />
+            <button id="add-btn">Adicionar</button>
+        </section>
+
+        <section id="habit-list">
+            <h2>Meus Hábitos</h2>
+            <ul id="habits"></ul>
+        </section>
+
+        <section id="stats">
+            <h2>Meus Hábitos</h2>
+            <canvas id="progressChart"></canvas>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 HabitFlow - Desenvolvido por Arielson Sousa Duarte</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
